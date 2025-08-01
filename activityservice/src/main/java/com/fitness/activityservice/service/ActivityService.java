@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ActivityService {
@@ -41,5 +44,18 @@ public class ActivityService {
         response.setCreatedAt(activity.getCreatedAt());
         response.setLastUpdated(activity.getLastUpdated());
         return response;
+    }
+
+    public List<ActivityResponse> getAllUserActivities(String userId) {
+        List<Activity> activities = activityRepository.findByUserId(userId);
+        return activities.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+    public ActivityResponse getActivityById(String activityId) {
+        return activityRepository.findById(activityId)
+                .map(this::mapToResponse)
+                .orElseThrow(() -> new RuntimeException(activityId + " Look here:  " + activityRepository.findById(activityId)))   ;
     }
 }
