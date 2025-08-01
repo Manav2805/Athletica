@@ -2,6 +2,7 @@ package com.fitness.activityservice.dto;
 
 import com.fitness.activityservice.model.ActivityType;
 import lombok.Data;
+import org.bson.types.ObjectId;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
 @Data
 public class ActivityResponse {
 
-    private String Id;
+    private String id;
     private String userId;
     private ActivityType type;
     private Integer duration;
