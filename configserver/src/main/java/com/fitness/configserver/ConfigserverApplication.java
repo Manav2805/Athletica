@@ -11,6 +11,8 @@ public class ConfigserverApplication {
 
 	public static void main(String[] args) {
 		Dotenv dotenv = Dotenv.load();
+		System.setProperty("MONGODB_CONNECTION_STRING", dotenv.get("MONGODB_CONNECTION_STRING"));
+		System.setProperty("MONGODB_DATABASE_AI", dotenv.get("MONGODB_DATABASE_AI"));
 		System.setProperty("POSTGRESQL_CONNECTION_STRING", dotenv.get("POSTGRESQL_CONNECTION_STRING"));
 		SpringApplication.run(ConfigserverApplication.class, args);
 	}
